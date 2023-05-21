@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace JobSubmissionSystem.Models
+namespace webapi.Models
 {
     public class Task
         //老师发布的作业
