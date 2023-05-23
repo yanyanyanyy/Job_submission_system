@@ -10,5 +10,5 @@ public class WeatherForecast
 
     public string? Summary { get; set; }
 
-    public Models.User? user { get; set; }
+    public Models.CorrectionInfor? commit { get; set; }
 }
