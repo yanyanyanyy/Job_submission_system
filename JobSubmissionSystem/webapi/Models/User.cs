@@ -5,6 +5,7 @@ namespace webapi.Models
 {
     public partial class User
     {
+        // 登录验证使用
         [Key]
         [Column("Id")]
         public int Id { get; set; }

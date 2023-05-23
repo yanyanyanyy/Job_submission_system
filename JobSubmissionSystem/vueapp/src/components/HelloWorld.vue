@@ -1,6 +1,11 @@
 <template>
     <div class="home">
-        <div v-for="d in data">{{d.id}}</div>
+        <div   v-for="d in t">
+            <p >{{d.content}}</p>
+            <div v-show ="{{d.xuanzhong}}">
+                <input />
+            </div>
+        </div>
     </div>
 </template>
 <script>
@@ -9,14 +14,23 @@
         name: 'HelloWorld',
         data() {
             return {
-                data: {},// getItemList  接口入参
-                
+                t: [{
+                    "content": "HelloWorld",
+                    "pizhu": "好的"
+                    "xuanzhong"; false,
+                    "xiugai":true
+                },
+                 {
+                    "content": "HelloWorld",
+                    "pizhu": "好的"
+                    "xuanzhong"; false
+                }],// getItemList  接口入参
             }
         },
         created() {
-            axios.get('/api/login/Getuser').then(
-                response => (this.data = response.data)
-            )
+            //axios.get('/api/login/Getuser').then(
+              //  response => (this.data = response.data)
+            //)
             
         }
     }

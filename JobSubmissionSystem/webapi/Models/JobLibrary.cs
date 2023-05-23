@@ -3,8 +3,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace webapi.Models
 {
-    public class TaskForStudent
-        //学生提交的作业
+    public class JobLibrary
+        //学生的作业库
     {
         [Key]
         [Column("id")]
