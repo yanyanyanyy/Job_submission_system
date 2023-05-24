@@ -13,5 +13,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="api\" />
+    <Folder Include="src\assets\" />
   </ItemGroup>
 </Project>
