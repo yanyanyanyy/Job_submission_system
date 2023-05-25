@@ -1,20 +1,22 @@
 <template>
-  <FileTree/>
+    <MenuPage>
+        测试
+    </MenuPage>
+  <CodePage/>
 </template>
 
 <script>
-import CorrectPage from './components/CorrectPage.vue';
-import FileTree from './components/FileTree.vue';
-
+import CodePage from './components/CorrectCodePage';
+import MenuPage from './components/MenuPage'
 export default {
   name: 'App',
   components: {
-    CorrectPage,
-    FileTree
+      CodePage,
+    MenuPage
 }
 }
 </script>
 
 <style>
-
+    
 </style>
