@@ -748,7 +748,7 @@ namespace Db
             conn.Close();
             return sid;
         }
-        public int getSubmissionHomeeworkId(int id)
+        public int getSubmissionHomeworkId(int id)
         {
             int hid = -1;//-1 for unfound
             //homework getting snteences
