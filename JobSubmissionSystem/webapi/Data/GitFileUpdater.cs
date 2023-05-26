@@ -218,7 +218,7 @@ public class Program
     {
         // 测试示例
         string addr = "https://github.com/brinenick511/test.git";
-        string token = "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";
+        string token = "请使用自己的token测试（token作为代码上传到git后会失效）";
 
         var ans = GetLatestUpdate(addr, token);
 
