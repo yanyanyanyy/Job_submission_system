@@ -1,73 +1,172 @@
-
-
 <template>
-  <!--一个登录界面-->
-  <div>
-
-    <h1>欢迎使用本系统！</h1>    
-    <!--选择身份的下拉框---->
-    <div>
-      请选择您的身份:
-      <el-select v-model="state" class="m-2" placeholder="Select">
-    <el-option
-      v-for="item in userId"
-      :key="item.value"
-      :label="item.label"
-      :value="item.value"
-    />
-  </el-select>
+    <div class="login">
+        <div class="relative">
+            <div class="left">
+                <el-row>
+                    <el-col :span="24">
+                        <div class="homepageLogo">
+                            <ul>
+                                <li>
+                                    <el-image style="width: 50px; height: 50px" :src="url" fit="fit" />
+                                </li>
+                                <li><span>作业提交系统</span></li>
+                            </ul>
+                        </div>
+                    </el-col>
+                </el-row>
+                <el-row>
+                    <el-col :span="24">
+                        <el-image class="boxbg" :src="boxbg" fit="fit" />
+                        <p class="p1">欢迎使用本系统</p>
+                    </el-col>
+                </el-row>
+            </div>
+            <div class="right">
+                <el-row>
+                    <el-col :span="24">
+                        <h2>登录</h2>
+                    </el-col>
+                </el-row>
+                <el-row>
+                    <el-col :span="24">
+                        <el-form :model="form" label-width="120px" label-position="top" size="large" class="form"
+                            :rules="rules" ref="ruleFormRef">
+                            <!--rules为表单验证规则，以下校验两个-->
+                            <el-form-item label="用户名" prop="userName">
+                                <el-input v-model="form.userName" />
+                            </el-form-item>
+                            <el-form-item label="密码" prop="passWord">
+                                <el-input v-model.number="form.passWord" type="password" show-password
+                                    />
+                            </el-form-item>
+                            <el-form-item>
+                                <el-button class="submitBtn" type="primary" @click="onSubmit(ruleFormRef)">登录
+                                </el-button>
+                            </el-form-item>
+                        </el-form>
+                    </el-col>
+                </el-row>
+            </div>
+        </div>
     </div>
-
-    <div> 
-      账号：
-      <el-input v-model="userid" placeholder="请输入账号" />
-    </div>
-    
-    <div>
-    <label>密码</label>
-    <el-input
-    v-model="password"
-    type="password"
-    placeholder="请输入密码"
-    show-password
-    />
-    </div>
-    
-    <p>如果没有注册将会在本系统中自动注册</p>
-    <!-- 这里点击登录/注册将会跳转至对应的界面 -->
-    <el-button type="success">登录/注册</el-button>  
-
-  </div>
 </template>
+<script lang="ts" setup>
+import { reactive, ref } from 'vue'
+import type { FormInstance, FormRules } from 'element-plus'
+//import store from '../../store/index'
+//import { useRouter } from 'vue-router';
+//import { getUser } from '../../http';
+//const router = useRouter()
+const url = ref('/images/logo.jpg')
+const boxbg = ref('/images/svgs/login-box-bg.svg')
+const form = reactive({
+    userName: '',
+    passWord: ''
+})
+const ruleFormRef = ref<FormInstance>()
+const rules = reactive<FormRules>({
+     userName: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
+     passWord: [{ required: true, message: '请输入密码', trigger: 'blur', type: "number" }]
+ })
+//接口部分：
+const onSubmit = async (ruleFormRef: FormInstance | undefined) => {
+    if (!ruleFormRef) return;
+    //校验逻辑
+     await ruleFormRef.validate(async (valid, fields) => {
+         if (valid) {
+            console.log("正在登录...")
+            //  let userId = (await getUser(form.userName, form.passWord)).data as number
+            //  ElMessage.success("登录成功！") 
+            //  // 设置pinia中的值
+            //  store().EditUserId(userId)
+            //  router.push({ path: "/" })
+         } else {
+            console.log("校验不通过！ ")
+            console.log(fields)
+            //  let errors: string = ""
+            //  fields?.userName?.forEach(element => {
+            //      errors += element.message + ';'
+            //  });
+            //  fields?.passWord?.forEach(element => {
+            //      errors += element.message + ';'
+            //  });
+            //  ElMessage.error(errors)
+         }
+     })
 
-<script>
-    export default{
-        data(){
-            return{
-              userId:[
-                {
-                  value: "teacher",
-                  label: "教师"
-                },
-                {
-                  value: "student",
-                  label: "学生"
-                }
-              ],
-              //TODO: 将UserName和PassWord传递给后端,后端通过UserName和PassWord判断是否存在该用户，如果存在则登录，如果不存在则注册
-              userid: "",
-              password: "",
-              //TODO: 将LoginState传递给后端,state有两种取值，一种是teacher，一种是student，传递给后端决定了跳转的界面
-              state:"",
-            }
-        },
-        methods:{
-          
-            
-        }
-    } 
+}
 </script>
+<style lang="scss" scoped>
+.login {
+    width: 100%;
+    height: 100%;
 
-<style scoped>
+    .relative {
+        width: 100%;
+        height: 100%;
+        text-align: center;
 
+        .left {
+            width: 50%;
+            height: 100%;
+            float: left;
+            background-image: url('/images/svgs/login-bg.svg');
+
+            .boxbg {
+                width: 300px;
+                height: 350px;
+                margin-top: 100px;
+            }
+
+            .homepageLogo {
+                height: 50px;
+                line-height: 50px;
+                margin-top: 40px;
+
+                span {
+                    color: white;
+                    font-size: 24px;
+                }
+
+                ul {
+                    list-style: none;
+
+                    li {
+                        float: left;
+                        margin-left: 5px;
+                    }
+                }
+            }
+
+            p {
+                color: white;
+            }
+
+            .p1 {
+                font-size: 1.875rem;
+                line-height: 2.25rem;
+            }
+
+            .p2 {
+                font-size: 0.875rem;
+                line-height: 1.25rem;
+            }
+        }
+
+        .right {
+            width: 50%;
+            float: left;
+            padding-top: 15%;
+
+            .form {
+                width: 50%;
+                margin: 0px auto;
+
+                .submitBtn {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
 </style>
