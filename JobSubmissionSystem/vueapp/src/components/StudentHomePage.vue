@@ -1,31 +1,67 @@
 <template>
-  <h1>欢迎！{{username}}</h1>
-    <!--本页面是登陆后的学生的第一个页面，在这个页面里可以跳转至查看新发布的作业和查看老师评语两个页面-->
-  <div>
-    <el-button type="primary">查看批改情况</el-button>
+  <div class="studentHome">
+  <!--本页面是学生登录之后的第一个页面，-->
+      <div class="relative">
+          <div class="studentImg">
+              <h1>xx同学欢迎您!!</h1>
+          </div>
+      
+          <div class="bottom">
+              <div class="flex justify-space-between mb-4 flex-wrap gap-4">
+                  <el-button
+                      v-for="button in buttons"
+                      :key="button.text"
+                      :type="button.type"
+                      text
+                      bg
+                  >{{ button.text }}</el-button>
+              </div>
+          </div>
+      </div>
   </div>
-  <div>
-    <el-button type="success">查看新发布的作业</el-button>
-  </div>
-</template>
-<script>
-export default{
+  </template>
+  
+  
+  <script lang="ts" setup>
+     const buttons = [ 
+     //点击后跳转到已经提交的作业页面
+      { type: 'warning', text: '已提交作业' },
+      //点击后跳转到新发布的作业页面
+      { type: 'warning', text: '新发布作业' },
+      ] as const
+  </script>
+  
+  <style lang="scss" scoped>
+  .studentHome{
+      position:absolute;
+      width: 100%;
+      height: 100%;
+      background-image: url('/images/svgs/login-bg.svg');
+      .relative{
+          width: 100%;
+          height: 100%;
+          text-align: center;
+          .studentImg{
+              margin-left: auto;
+              margin-right: auto;
+              margin-top: 100px;
+              line-height: 300px;
+              width:475px;
+              height:325px;
+              background-image: url("/images/teacherHome.jpg");
+              background-size: contain;
 
-    name:"StudentHomePage",
-    data(){
-        return{
-            //TODO: 后端传进来username作为欢迎语
-            username: "张三",
-        }
-    },
-    methods:{
-                 
-                    
-    }
-} 
-</script>
-      
-<style scoped>
-      
-</style>
-      
+              h1{
+                  color:white;
+                  font-size: 45px;
+              }   
+          }
+          .bottom{
+              position:relative;
+              top:30px;
+              
+          }
+      }
+  }
+  </style>
+        
