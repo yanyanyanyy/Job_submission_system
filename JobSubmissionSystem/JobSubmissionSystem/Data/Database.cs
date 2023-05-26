@@ -618,7 +618,7 @@ namespace Db
             conn.Close();
             return name;
         }
-        public string getHomeworkDeescription(int id)
+        public string getHomeworkDescription(int id)
         {
             string desc = "Not found.";//for unfound
             //description getting sentences
