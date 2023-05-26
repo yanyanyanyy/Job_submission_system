@@ -15,7 +15,7 @@ It would be better that:
 
 	#While using
 Use namespace Db and class Db.
-The functions of the methods are as follows:
+The functions of the 43 methods are as follows:
 	1.1 createDb
 		A private void method  to create a database named ASSIGNMENT at localhost:3306, user root, password 123456.
 	1.2 createTb
