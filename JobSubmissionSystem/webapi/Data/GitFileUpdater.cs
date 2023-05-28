@@ -31,6 +31,8 @@ public class Url
 public class UrlFile
 {
     [JsonProperty("filename")] public string filename { get; set; }
+    [JsonProperty("raw_url")] public string raw_url { get; set; }
+
 }
 
 
@@ -136,7 +138,6 @@ public class Program
                     {
                         continue;
                     }
-                    // 我需要在这里查询files中是否有这样一个file，如果
                     int idx = files.FindIndex(f => f.Path == tmpPath);
                     if (idx == -1)
                     {
@@ -145,12 +146,15 @@ public class Program
                         {
                             idx = AssIdx,
                             Path = tmpPath,
-                            times = new List<DateTime> { tmpTime }
+                            times = new List<DateTime> { tmpTime },
+                            // 注意：times获取时就是按降序排序的！
+                            rawUrl = filename.raw_url
                         });
                     }
                     else
                     {
                         files[idx].times.Add(tmpTime);
+                        
                     }
 
                 }
@@ -163,6 +167,8 @@ public class Program
 
         var list = new List<CR>();
         var result = GetFileInformation(addr, token).GetAwaiter().GetResult();
+        Console.WriteLine("Assignments04/1.txt: " + GetRawUrl(ref result, "Assignments04/1.txt"));
+
         foreach (var file in result)
         {
             // 只处理作业文件
@@ -176,6 +182,7 @@ public class Program
                 if (cr.index == file.idx)
                 {
                     flag = false;
+                    // 更新时间的min-max
                     if (cr.updated == null || cr.updated < updated)
                     {
                         cr.updated = updated;
@@ -198,6 +205,10 @@ public class Program
 
         }
         return list;
+    }
+    public static string GetRawUrl(ref List<F> files, string Path)
+    {
+        return files.Find(f => f.Path == Path).rawUrl;
     }
     public static void Main(string[] args)
     {
@@ -240,9 +251,10 @@ public class F
     public string Path { get; set; } // 文件路径及文件名
     public List<DateTime> times { get; set; } // 每一次修改的时间
     public int idx { get; set; } // 文件所属的作业号
+    public string rawUrl { get; set; } // 文件最新的下载地址
     public void disp()
     {
-        Console.WriteLine($"\nPath: {Path}, Idx: {idx}");
+        Console.WriteLine($"\nPath: {Path}, Idx: {idx}, rawUrl: {rawUrl}");
         foreach (var times in times)
         {
             Console.WriteLine(times.ToString());
