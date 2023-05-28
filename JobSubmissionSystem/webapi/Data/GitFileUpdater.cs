@@ -204,7 +204,8 @@ public class Program
             }
 
         }
-        return list;
+        List<CR> sortedList = list.OrderBy(cr => cr.index).ToList();
+        return sortedList;
     }
     public static string GetRawUrl(ref List<F> files, string Path)
     {
