@@ -211,6 +211,14 @@ public class Program
     {
         return files.Find(f => f.Path == Path).rawUrl;
     }
+    public static void Downloader(string addr,string localPath)
+    {
+        // addr是rawUrl，将addr处文件下载到本地的localPath。
+        using (WebClient client = new WebClient())
+        {
+            client.DownloadFile(addr, localPath);
+        }
+    }
     public static void Main(string[] args)
     {
         // 测试示例
