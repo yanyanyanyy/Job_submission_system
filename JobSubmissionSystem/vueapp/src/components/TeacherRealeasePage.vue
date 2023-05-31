@@ -1,49 +1,45 @@
 <template>
-    <!--本页面是教师点击发布作业按钮之后跳转到的页面-->
-    <div>请您发布作业！</div>
+  <!--本页面是教师点击发布作业按钮之后跳转到的页面-->
+  <div class="teacherRealease">
     <br>
-    <div>
-      发布班级：
+    <div id="div1">请您发布作业！</div>
+    <br><br><br>
+    <div class="allSelect">
+    发布班级：
     <!--适用广泛的基础单选 v-model 的值为当前被选中的 el-option 的 value 属性值-->
     <el-select v-model="classNumPolished" class="m-2" placeholder="请选择要发布的班级">
-          <el-option
-            v-for="item in classNumPolish"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
-          />
+      <el-option
+        v-for="item in classNumPolish"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value"
+      />
     </el-select>
-  
-    </div>    
-  
-    <br>
-  
-    <div>
+    </div>
+     
+    <br><br>
+    <div class="allSelect">
       作业标题/简介：
       <el-input v-model="polishText" placeholder="请输入内容  " clearable />
-      
     </div>
-  
-    <br>
-  
+
+    <br><br><br>
     <!--截止日期控件，但是功能没做好，不知道选择的日期传递到哪里去-->
-    <div>
-      <div class="block">
-        <span class="demonstration">请设置截止日期：</span>
-        <el-date-picker
-          v-model="value2"
-          type="datetime"
-          placeholder="请选择截止时间"
-          :shortcuts="shortcuts"
-        />
-      
+    <div class="allSelect">
+      <span class="demonstration">请设置截止日期：</span>
+      <el-date-picker
+        v-model="value2"
+        type="datetime"
+        placeholder="请选择截止时间"
+        :shortcuts="shortcuts"
+      />
     </div>
   
-    <br>
+    <br><br><br>
+    <div class="allSelect" id="div2">
     <!--上传附件-->
-    <div>
       请上传附件：
-      <el-upload
+    <el-upload
       v-model:file-list="fileList"
       class="upload-demo"
       action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15"
@@ -54,25 +50,22 @@
       :limit="3"
       :on-exceed="handleExceed"
     >
-      <el-button type="primary">Click to upload</el-button>
+      <el-button class="assign" type="primary">Click to upload</el-button>
       <template #tip>
-        <div class="el-upload__tip">
-          jpg/png文件不能超过500KB
-        </div>
+        <div class="el-upload__tip">jpg/png文件不能超过500KB</div>
       </template>
     </el-upload>
-    </div>
-    </div>
+  </div>
     
-    <br>
+    <br><br><br>
     <!--点击发布作业之后会跳转到作业列表页面,功能未实现-->
-    <div>
-      <el-button type="success" round>点击发布作业</el-button>
-    </div>
+    
+    <el-button class="publish" type="success" round>点击发布作业</el-button>
     
     <!--返回按钮-->
-<el-button type="info">返回上一页</el-button>
-  </template>
+    <el-button class="back" type="info">返回上一页</el-button>
+  </div>
+</template>
   
   <script>
     export default{
@@ -118,6 +111,26 @@
     }
   </script>
   
-  <style>
-  
+  <style lang="scss" scoped>
+    .teacherRealease{
+      width: 100%;
+      height: 100%;
+      color:#f9cdaa;
+      background-image: url('/images/svgs/login-bg.svg');
+      
+      .back{
+        float:right;
+      }
+    #div1{
+      font-size:25px;
+      height: 30px;
+      text-align: center;
+    }
+    #div2{
+      height:80px;
+    }
+    .allSelect{
+      font-size:20px;
+    }
+  }
   </style>
