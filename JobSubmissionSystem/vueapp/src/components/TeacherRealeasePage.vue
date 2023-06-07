@@ -1,5 +1,6 @@
 <template>
   <!--本页面是教师点击发布作业按钮之后跳转到的页面-->
+
   <div class="teacherRealease">
     <br>
     <div id="div1">请您发布作业！</div>
@@ -24,7 +25,7 @@
     </div>
 
     <br><br><br>
-    <!--截止日期控件，但是功能没做好，不知道选择的日期传递到哪里去-->
+    <!--截止日期控件，选择的日期传给value2变量-->
     <div class="allSelect">
       <span class="demonstration">请设置截止日期：</span>
       <el-date-picker
@@ -73,6 +74,8 @@
       name:"TaecherRealeasePage",
       data(){
         return{
+          //TODO:选择的日期传给value2变量
+          value2: '',
           //TODO:发布作业的班级号，如果有时间的话可以完善，后端向classNum传输数据
           classNumPolish:[
         {
