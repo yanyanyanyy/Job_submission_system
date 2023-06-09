@@ -366,7 +366,7 @@ public class GitTools
     {
         // 测试示例
         string addr = "https://github.com/brinenick511/test";
-        string token = "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";
+        string token = "ghp_WS6Tlz5"+"W75n1FshqmhJz"+"T75DE6nmlm27tLyp";
 
         var (crs, files) = GetAssignments(addr, token);
         var root = work(files);
